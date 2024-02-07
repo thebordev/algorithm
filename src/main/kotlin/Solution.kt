@@ -18,4 +18,12 @@ class Solution {
 
         return result.toString()
     }
+    fun kidsWithCandies(candies: IntArray, extraCandies: Int): List<Boolean> {
+        val result = ArrayList<Boolean>()
+        val max = candies.max()
+        candies.forEach {
+            result.add(it.plus(extraCandies) >= max)
+        }
+        return result
+    }
 }
