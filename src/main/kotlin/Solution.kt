@@ -26,4 +26,27 @@ class Solution {
         }
         return result
     }
+
+    fun getConcatenation(nums: IntArray): IntArray {
+        return nums + nums
+    }
+
+    fun canPlaceFlowers(flowerbed: IntArray, n: Int): Boolean {
+        var result = 0
+        var lastStep = false
+        for (i: Int in 1 until flowerbed.size) {
+            if (flowerbed[i] == 0 && flowerbed[i - 1] == 0 && !lastStep) {
+                if (flowerbed.size > i && flowerbed[i + 1] == 1) {
+
+                } else {
+                    result++
+                    lastStep = true
+                }
+            } else {
+                lastStep = false
+            }
+        }
+        println(result)
+        return result == n
+    }
 }
