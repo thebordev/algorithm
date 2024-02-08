@@ -1,4 +1,3 @@
-import java.lang.StringBuilder
 
 class Solution {
     fun mergeAlternately(word1: String, word2: String): String {
@@ -29,6 +28,38 @@ class Solution {
 
     fun getConcatenation(nums: IntArray): IntArray {
         return nums + nums
+    }
+
+    fun Char.isVowel(): Boolean {
+        return when (this.toLowerCase()) {
+            'a' -> true
+            'e' -> true
+            'i' -> true
+            'o' -> true
+            'u' -> true
+            else -> { false }
+        }
+    }
+
+    fun reverseVowels(s: String): String {
+        val result = StringBuilder()
+        var vowels: CharArray = CharArray(s.length)
+        var j = 0
+        s.forEachIndexed { index, c ->
+            if (c.isVowel()) {
+                vowels[j] = c
+                j++
+            }
+        }
+        s.forEachIndexed { index, c ->
+            if (c.isVowel()) {
+                j--
+                result.append(vowels[j])
+            } else {
+                result.append(c)
+            }
+        }
+        return result.toString()
     }
 
     fun canPlaceFlowers(flowerbed: IntArray, n: Int): Boolean {
