@@ -1,4 +1,3 @@
 fun main(args: Array<String>) {
-    println(Solution().reverseVowels("hello"))
-    println(Solution().reverseVowels("leetcode"))
+    println(Solution().sortPowHard(listOf(-3, 2, 4)))
 }

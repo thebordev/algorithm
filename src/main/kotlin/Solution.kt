@@ -1,3 +1,4 @@
+import kotlin.math.abs
 
 class Solution {
     fun mergeAlternately(word1: String, word2: String): String {
@@ -40,6 +41,76 @@ class Solution {
             else -> { false }
         }
     }
+
+    fun binarySearch(elements: IntArray, elementToFind: Int, low: Int, high: Int): Int {
+        var highLevel = high
+        var lowLevel = low
+        while (low <= highLevel) {
+            val mid = (low + highLevel) / 2
+            if (elements[mid] == elementToFind) {
+                return mid
+            } else if (elements[mid] > highLevel) {
+                highLevel = mid - 1
+            } else {
+                lowLevel = mid - 1
+            }
+        }
+        return 0
+    }
+
+    fun sortedSquares(nums: IntArray): IntArray {
+        val result = IntArray(nums.size)
+        val n = result.size
+        var i = 0
+        var j = n - 1
+        for (p in j downTo 0) {
+            if (abs(nums[i]) > abs(nums[j])) {
+                nums[p] = nums[i] * nums[i]
+                i++
+            } else {
+                nums[p] = nums[j] * nums[j]
+                j--
+            }
+        }
+        return result
+    }
+
+    fun sortPowHard(numbers: List<Int>): List<Int> {
+        val newArray = ArrayList<Int>()
+        numbers.forEach {
+            newArray.add(it.square())
+        }
+        newArray.sort()
+        quickSortLomuto(newArray.toIntArray())
+        return newArray
+    }
+
+    fun quickSortLomuto(arr: IntArray, start: Int = 0, end: Int = arr.size - 1) {
+        if (start < end) {
+            val pivot = partitionLomuto(arr, start, end)
+            quickSortLomuto(arr, start, pivot - 1)
+            quickSortLomuto(arr, pivot + 1, end)
+        }
+    }
+
+    fun partitionLomuto(arr: IntArray, start: Int, end: Int): Int {
+        val pivot = arr[end]
+        var i = start
+        for (j in start until end) {
+            if (arr[j] < pivot) {
+                val temp = arr[i]
+                arr[i] = arr[j]
+                arr[j] = temp
+                i++
+            }
+        }
+        val temp = arr[i]
+        arr[i] = arr[end]
+        arr[end] = temp
+        return i
+    }
+
+    private fun Int.square() = this * this
 
     fun reverseVowels(s: String): String {
         val result = StringBuilder()
